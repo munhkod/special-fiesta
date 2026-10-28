@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value="Toony shidet husnegt"/>
+        <attribute name="authors" value=""/>
+        <attribute name="about" value="APL121 BD1 - Sedev 12: Toony shidet husnegt"/>
+        <attribute name="saved" value="2026-10-28 12:00:00 PM"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a" type="Integer" array="False" size=""/>
+            <declare name="b" type="Integer" array="False" size=""/>
+            <declare name="c" type="Integer" array="False" size=""/>
+            <declare name="rows" type="Integer" array="False" size=""/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="sumA" type="Integer" array="False" size=""/>
+            <declare name="sumB" type="Integer" array="False" size=""/>
+            <declare name="sumC" type="Integer" array="False" size=""/>
+            <declare name="maxNum" type="Integer" array="False" size=""/>
+            <declare name="maxSum" type="Integer" array="False" size=""/>
+            <output expression="&quot;=== TOONY SHIDET HUSNEGT ===&quot;" newline="True"/>
+            <comment text="Orolt: 3 too (ReadNumber dotor do-while shalgalt)"/>
+            <assign variable="a" expression="ReadNumber(1)"/>
+            <assign variable="b" expression="ReadNumber(2)"/>
+            <assign variable="c" expression="ReadNumber(3)"/>
+            <do expression="rows &lt; 5 || rows &gt; 10">
+                <output expression="&quot;Urjuuleh husnegtiin mor (5-10): &quot;" newline="False"/>
+                <input variable="rows"/>
+                <if expression="rows &lt; 5 || rows &gt; 10">
+                    <then>
+                        <output expression="&quot;Aldaa! 5-10 hoorond too oruulna uu.&quot;" newline="True"/>
+                    </then>
+                    <else/>
+                </if>
+            </do>
+            <comment text="1. Urjuuleh husnegt"/>
+            <output expression="&quot;--- Urjuuleh husnegt ---&quot;" newline="True"/>
+            <output expression="&quot;x | &quot; &amp; a &amp; &quot; | &quot; &amp; b &amp; &quot; | &quot; &amp; c" newline="True"/>
+            <output expression="&quot;-------------------------------------&quot;" newline="True"/>
+            <for variable="i" start="1" end="rows" direction="inc" step="1">
+                <output expression="i &amp; &quot; | &quot; &amp; a * i &amp; &quot; | &quot; &amp; b * i &amp; &quot; | &quot; &amp; c * i" newline="True"/>
+            </for>
+            <comment text="2. Too buriin medeelel (Call blok)"/>
+            <output expression="&quot;--- Toony medeelel ---&quot;" newline="True"/>
+            <output expression="&quot;Too | Turul | Niilber | Urvuu | Angilal | Shidet&quot;" newline="True"/>
+            <output expression="&quot;-------------------------------------------------------&quot;" newline="True"/>
+            <call expression="PrintInfo(a)"/>
+            <call expression="PrintInfo(b)"/>
+            <call expression="PrintInfo(c)"/>
+            <comment text="3. Khailt: hamgiin ih tsifriin niilber"/>
+            <assign variable="sumA" expression="DigitSum(a)"/>
+            <assign variable="sumB" expression="DigitSum(b)"/>
+            <assign variable="sumC" expression="DigitSum(c)"/>
+            <assign variable="maxNum" expression="a"/>
+            <assign variable="maxSum" expression="sumA"/>
+            <if expression="sumB &gt; maxSum">
+                <then>
+                    <assign variable="maxNum" expression="b"/>
+                    <assign variable="maxSum" expression="sumB"/>
+                </then>
+                <else/>
+            </if>
+            <if expression="sumC &gt; maxSum">
+                <then>
+                    <assign variable="maxNum" expression="c"/>
+                    <assign variable="maxSum" expression="sumC"/>
+                </then>
+                <else/>
+            </if>
+            <output expression="&quot;Hamgiin ih tsifriin niilbertei too: &quot; &amp; maxNum &amp; &quot; (niilber = &quot; &amp; maxSum &amp; &quot;)&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="ReadNumber" type="Integer" variable="n">
+        <parameters>
+            <parameter name="idx" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <do expression="n &lt; 1 || n &gt; 99999">
+                <output expression="idx &amp; &quot;-r too (1-99999): &quot;" newline="False"/>
+                <input variable="n"/>
+                <if expression="n &lt; 1 || n &gt; 99999">
+                    <then>
+                        <output expression="&quot;Aldaa! 1-99999 hoorond too oruulna uu.&quot;" newline="True"/>
+                    </then>
+                    <else/>
+                </if>
+            </do>
+        </body>
+    </function>
+    <function name="DigitSum" type="Integer" variable="sum">
+        <parameters>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <declare name="x" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <assign variable="x" expression="n"/>
+            <while expression="x &gt; 0">
+                <assign variable="sum" expression="sum + x % 10"/>
+                <assign variable="x" expression="ToInteger((x - x % 10) / 10)"/>
+            </while>
+        </body>
+    </function>
+    <function name="Reverse" type="Integer" variable="rev">
+        <parameters>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="rev" type="Integer" array="False" size=""/>
+            <declare name="x" type="Integer" array="False" size=""/>
+            <assign variable="rev" expression="0"/>
+            <assign variable="x" expression="n"/>
+            <while expression="x &gt; 0">
+                <assign variable="rev" expression="rev * 10 + x % 10"/>
+                <assign variable="x" expression="ToInteger((x - x % 10) / 10)"/>
+            </while>
+        </body>
+    </function>
+    <function name="PrintInfo" type="None" variable="">
+        <parameters>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <declare name="rev" type="Integer" array="False" size=""/>
+            <declare name="kind" type="String" array="False" size=""/>
+            <declare name="level" type="String" array="False" size=""/>
+            <declare name="lucky" type="String" array="False" size=""/>
+            <assign variable="sum" expression="DigitSum(n)"/>
+            <assign variable="rev" expression="Reverse(n)"/>
+            <if expression="n % 2 == 0">
+                <then>
+                    <assign variable="kind" expression="&quot;Tegsh&quot;"/>
+                </then>
+                <else>
+                    <assign variable="kind" expression="&quot;Sondgoi&quot;"/>
+                </else>
+            </if>
+            <if expression="sum &lt;= 9">
+                <then>
+                    <assign variable="level" expression="&quot;Baga&quot;"/>
+                </then>
+                <else>
+                    <if expression="sum &lt;= 18">
+                        <then>
+                            <assign variable="level" expression="&quot;Dund&quot;"/>
+                        </then>
+                        <else>
+                            <assign variable="level" expression="&quot;Ih&quot;"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <comment text="Shidet: 2+ orontoi tolt too, ESVEL tsifriin niilber 7"/>
+            <if expression="(n == rev &amp;&amp; n &gt;= 10) || sum == 7">
+                <then>
+                    <assign variable="lucky" expression="&quot;Tiim *&quot;"/>
+                </then>
+                <else>
+                    <assign variable="lucky" expression="&quot;Ugui&quot;"/>
+                </else>
+            </if>
+            <output expression="n &amp; &quot; | &quot; &amp; kind &amp; &quot; | &quot; &amp; sum &amp; &quot; | &quot; &amp; rev &amp; &quot; | &quot; &amp; level &amp; &quot; | &quot; &amp; lucky" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
